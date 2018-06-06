@@ -47,6 +47,6 @@ macro(add_tex_files TARGET_NAME TEX_MAIN_FILE)
         )
         add_custom_command (OUTPUT ${MAIN_TEX_FILE_STEM}.aux
                 COMMAND ${CMAKE_COMMAND} -E env TEXINPUTS=$ENV{TEXINPUTS}:${CMAKE_CURRENT_SOURCE_DIR} ${MI_LATEX_COMMAND} -draftmode ${LATEX_BATCH_OPTION} ${TEX_MAIN_FILE} ${MI_REDIRECT_TO_DEV_NULL} ${REDIRECTION} ${DEV_NULL}
-                DEPENDS ${OTHER_FILES}
+                DEPENDS ${OTHER_FILES} ${TEX_MAIN_FILE}
         )
 endmacro()
