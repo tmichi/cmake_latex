@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
-#set(CMAKE_VERBOSE_MAKEFILE 1)
+set(CMAKE_VERBOSE_MAKEFILE 1)
 project(exmaple NONE)
 include (miLATEX.cmake)
 
