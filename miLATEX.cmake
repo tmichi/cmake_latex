@@ -4,7 +4,8 @@ set(MI_BIBTEX_COMMAND "bibtex")
 # @todo function だと <TARGET_NAME>_SOURCE_DIRの定義が必要(方法がわからなかかった．)
 macro(add_tex_files TARGET_NAME TEX_MAIN_FILE)
         get_filename_component(MAIN_TEX_FILE_STEM ${TEX_MAIN_FILE} NAME_WE) # e.g. TEX_MAIN_FILE = main.tex MAIN_TEX_FILE_STEM = main
-        if ((NOT DEFINED ${CMAKE_VERBOSE_MAKEFILE}) OR (${CMAKE_VERBOSE_MAKEFILE} EQUAL 0))
+        if (${CMAKE_VERBOSE_MAKEFILE} EQUAL 1)
+	else ()
                 set(REDIRECTION ">")
                 if (WIN32)
                         set(DEV_NULL "nul")
@@ -47,6 +48,6 @@ macro(add_tex_files TARGET_NAME TEX_MAIN_FILE)
         )
         add_custom_command (OUTPUT ${MAIN_TEX_FILE_STEM}.aux
                 COMMAND ${CMAKE_COMMAND} -E env TEXINPUTS=$ENV{TEXINPUTS}:${CMAKE_CURRENT_SOURCE_DIR} ${MI_LATEX_COMMAND} -draftmode ${LATEX_BATCH_OPTION} ${TEX_MAIN_FILE} ${MI_REDIRECT_TO_DEV_NULL} ${REDIRECTION} ${DEV_NULL}
-                DEPENDS ${OTHER_FILES} ${TEX_MAIN_FILE}
+                DEPENDS ${OTHER_FILES}
         )
 endmacro()
